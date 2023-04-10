@@ -58,13 +58,14 @@ export default function ImageGallery({ pictureFindName }) {
 
     foo();
 
-    return () => {
-      console.log('return');
-    };
+  //   return () => {
+  //     console.log('return');
+  //   };
   }, [pictureFindName, currentPage]);
 
   // запит картинок
   function fetchImages(query, page) {
+    // console.log('fetch', query, page);
     const data = fetch(
       `${API_URL}?key=${API_KEY}&q=${query}&page=${page}&per_page=12`
     ).then(res => res.json());
