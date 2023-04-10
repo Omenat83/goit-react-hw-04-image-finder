@@ -1,26 +1,22 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
-import { Searchbar } from './Searchbar/Searchbar';
-import { ImageGallery } from './ImageGallery/ImageGallery';
+import Searchbar from './Searchbar/Searchbar';
+import ImageGallery from './ImageGallery/ImageGallery';
 import { Div } from './App.styled';
 
-export class App extends Component {
-  state = {
-    pictureName: '',
-  };
+export default function App() {
+  const [pictureName, setPictureName] = useState('');
 
   // передача значення інпуту з Searchbar під час сабміту форми
-  onFormSubmit = pictureName => {
-    this.setState({ pictureName });
+  const onFormSubmit = pictureName => {
+    setPictureName(pictureName);
   };
 
-  render() {
-    return (
-      <Div>
-        <ToastContainer autoClose={2500} />
-        <Searchbar onSubmit={this.onFormSubmit} />
-        <ImageGallery pictureFindName={this.state.pictureName} />
-      </Div>
-    );
-  }
+  return (
+    <Div>
+      <ToastContainer autoClose={2500} />
+      <Searchbar onSubmit={onFormSubmit} />
+      <ImageGallery pictureFindName={pictureName} />
+    </Div>
+  );
 }
