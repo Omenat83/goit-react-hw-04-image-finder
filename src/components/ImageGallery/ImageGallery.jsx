@@ -11,7 +11,7 @@ import { GalUl } from './ImageGallery.styled';
 const API_URL = 'https://pixabay.com/api/';
 const API_KEY = '33668245-88b2d78a431fcfde02e20361a';
 
-export default function ImageGallery({ pictureFindName }) {
+export default function ImageGallery({ pictureFindName}) {
   const [currentPage, setCurrentPage] = useState(1);
   const [pictures, setPictures] = useState([]);
   const [status, setStatus] = useState('idle');
@@ -29,6 +29,8 @@ export default function ImageGallery({ pictureFindName }) {
 
     setStatus('pending');
 
+    foo();
+
     async function foo() {
       try {
         const data = await fetchImages(pictureFindName, currentPage);
@@ -44,7 +46,8 @@ export default function ImageGallery({ pictureFindName }) {
         } else {
           setPictures(prevPictures => [...prevPictures, ...data.hits]);
         }
-        if (data.totalHits < 12) {
+
+        if (data.hits.length < 12) {
           setStatus('idle');
           return toast.warn(
             `Sorry, picture including ${pictureFindName} ended :(`
@@ -55,17 +58,11 @@ export default function ImageGallery({ pictureFindName }) {
         toast.error('Sorry, something wrong. Try again later');
       }
     }
-
-    foo();
-
-  //   return () => {
-  //     console.log('return');
-  //   };
   }, [pictureFindName, currentPage]);
 
   // запит картинок
   function fetchImages(query, page) {
-    // console.log('fetch', query, page);
+    console.log('fetch', query, page);
     const data = fetch(
       `${API_URL}?key=${API_KEY}&q=${query}&page=${page}&per_page=12`
     ).then(res => res.json());

@@ -16,7 +16,7 @@ export default function App() {
     <Div>
       <ToastContainer autoClose={2500} />
       <Searchbar onSubmit={onFormSubmit} />
-      <ImageGallery pictureFindName={pictureName} />
+      <ImageGallery pictureFindName={pictureName}/>
     </Div>
   );
 }
